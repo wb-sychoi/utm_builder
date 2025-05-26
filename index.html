@@ -14,6 +14,14 @@
             border: 2px solid black;
             width: 1200px;
         }
+
+        .table_box {
+            font-size: 12px;
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 
@@ -40,10 +48,6 @@
         <label for="ad_group_name_number">순번: <input type="text" id="ad_group_name_number" placeholder="00"></label>
         <label for="ad_group_name_code">캠페인 코드 추출: 캠페인명에 생성된 결과를 붙여넣으세요.<input type="text" id="ad_group_name_code"
                 placeholder="예: 00.브랜드-AA"></label>
-        <!-- <button onclick="extractSuffix()">추출</button> -->
-
-        <!-- <h3>추출 결과:</h3> -->
-        <!-- <pre id="ad_group_name_code_result">(여기에 캠페인 CODE가 출력됩니다)</pre> -->
 
         <label for="ad_group_name_title">서브도메인: <input type="text" id="ad_group_name_title"
                 placeholder="{아이템}_{아이템}_..."></label><br><br>
@@ -171,7 +175,222 @@
 
     </div>
 
+    <hr>
+    <h1>GUIDE</h1>
+    <button id="view_button">보기</button>
+    <div id="guide_box" class="hidden">
+        <div class="utm_table">
+            <h3>UTM 구조 예시</h3>
+            <table border="1" class="table_box">
+                <thead>
+                    <tr>
+                        <th>매체명</th>
+                        <th>광고유형</th>
+                        <th>utm_source</th>
+                        <th>utm_medium</th>
+                        <th>utm_campaign</th>
+                        <th>utm_content</th>
+                        <th>utm_term</th>
+                        <th>utm_id</th>
+                        <th>utm 적용 예시</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- 네이버 -->
+                    <tr>
+                        <td rowspan="2">네이버</td>
+                        <td>파워링크</td>
+                        <td>naver</td>
+                        <td>cpc</td>
+                        <td>광고그룹명</td>
+                        <td>{query}</td>
+                        <td>{keyword}</td>
+                        <td>{ad}</td>
+                        <td>utm_source=naver&utm_medium=cpc&utm_campaign=광고그룹명&utm_content={query}&utm_term={keyword}&utm_id={ad}
+                        </td>
+                    </tr>
+                    <tr>
+                        <!-- 네이버 셀은 rowspan으로 병합했으므로 생략 -->
+                        <td>브랜드검색</td>
+                        <td>naver</td>
+                        <td>cpc</td>
+                        <td>광고그룹명</td>
+                        <td>{query}-클릭위치(enum)</td>
+                        <td>{keyword}</td>
+                        <td>{ad}</td>
+                        <td>utm_source=naver&utm_medium=cpc&utm_campaign=광고그룹명&utm_content={query}-클릭위치(enum)&utm_term={keyword}&utm_id={ad}
+                        </td>
+                    </tr>
+                    <!-- 구글 -->
+                    <tr>
+                        <td rowspan="5">구글</td>
+                        <td>검색</td>
+                        <td>google</td>
+                        <td>cpc</td>
+                        <td>광고그룹명</td>
+                        <td></td>
+                        <td>{keyword}</td>
+                        <td>{creative}</td>
+                        <td>utm_source=google&utm_medium=cpc&utm_campaign=광고그룹명&utm_term={keyword}&utm_id={creative}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>디스플레이</td>
+                        <td>google</td>
+                        <td>display</td>
+                        <td>광고그룹명</td>
+                        <td>광고명</td>
+                        <td></td>
+                        <td>{creative}</td>
+                        <td>utm_source=google&utm_medium=display&utm_campaign=광고그룹명&utm_content=광고명&utm_id={creative}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>동영상</td>
+                        <td>google</td>
+                        <td>paid_video</td>
+                        <td>광고그룹명</td>
+                        <td>광고명</td>
+                        <td></td>
+                        <td>{creative}</td>
+                        <td>utm_source=google&utm_medium=paid_video&utm_campaign=광고그룹명&utm_content=광고명&utm_id={creative}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>디멘드젠</td>
+                        <td>google</td>
+                        <td>cpc</td>
+                        <td>광고그룹명</td>
+                        <td>광고명</td>
+                        <td></td>
+                        <td>{creative}</td>
+                        <td>utm_source=google&utm_medium=cpc&utm_campaign=광고그룹명&utm_content=광고명&utm_id={creative}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>PMAX</td>
+                        <td>google</td>
+                        <td>cpc</td>
+                        <td>광고그룹명</td>
+                        <td>에셋그룹명</td>
+                        <td></td>
+                        <td>에셋그룹ID - 수동입력</td>
+                        <td>utm_source=google&utm_medium=cpc&utm_campaign=캠페인명&utm_content=에셋그룹명&utm_id=애셋그룹ID - 수동입력
+                        </td>
+                    </tr>
+                    <!-- 메타 -->
+                    <tr>
+                        <td colspan="2">메타</td>
+                        <td>{{site_source_name}}</td>
+                        <td>paid_social</td>
+                        <td>{{adset.name}}</td>
+                        <td>{{ad.name}}-{{placement}}</td>
+                        <td></td>
+                        <td>{{ad.id}}</td>
+                        <td>utm_source={{site_source_name}}&utm_medium=paid_social&utm_campaign={{adset.name}}&utm_content={{ad.name}}-{{placement}}&utm_id={{ad.id}}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="media_table">
+            <h3>매체별 이름 구조 예시</h3>
+            <table border="1" class="table_box">
+                <thead>
+                    <tr>
+                        <th>매체명</th>
+                        <th>광고유형</th>
+                        <th>캠페인명</th>
+                        <th>광고그룹명</th>
+                        <th>광고명</th>
+                        <th rowspan="2">매체별 이름 구조 설정 규칙</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="2">예시</td>
+                        <td>순번.{아이템}_{아이템}_...-{CODE}</td>
+                        <td>순번.{CODE}-{아이템}_{아이템}_...-핵심목표-운영방식-디바이스-매체/캠페인유형-추가데이터</td>
+                        <td>{주제1}_{주제1-1}-A/B-버전-심의정보-소재유형-등록일자-추가설명</td>
+                        <td rowspan="9">1. 같은 항목 및 띄어쓰기는 언더바(_) 로 작성 (띄어쓰기 금지)<br>예) 01.브랜드_자사명 (O) / 1. 브랜드 자사명 (X)<br>
+                            2. 순번은 마침표(.)로 구분, 구분자는 하이픈(-)으로 작성<br>예) 00.브랜드_자사명-GG<br>
+                            3. 마침표(.), 하이픈(-), 언더바(_) 외 특수문자 사용 금지<br>
+                            4. 코드명의 경우 A-Z 사이 2자리로 알파벳으로 구분<br>(만약 한 캠페인유형에서 AZ 까지 많을 경우 AA, AB, AC … AY, AZ, A0, A1, …
+                            A9까지
+                            가능)
+                        </td>
+                    </tr>
+                    <!-- 네이버 -->
+                    <tr>
+                        <td rowspan="2">네이버</td>
+                        <td>파워링크</td>
+                        <td>00.파워링크캠페인이름-AA</td>
+                        <td>00.AA-파워링크광고그룹이름-TR-A-P-NSPW</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <!-- 네이버 셀은 rowspan으로 병합했으므로 생략 -->
+                        <td>브랜드검색</td>
+                        <td>00.브랜드검색캠페인이름-BA</td>
+                        <td>00.BA-브랜드검색광고그룹이름-BR-A-M-NSBR</td>
+                        <td></td>
+                    </tr>
+                    <!-- 구글 -->
+                    <tr>
+                        <td rowspan="5">구글</td>
+                        <td>검색</td>
+                        <td>00.구글검색캠페인이름-AA</td>
+                        <td>00.AA-구글검색광고세트이름-TR-A-A-GGSA</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>디스플레이</td>
+                        <td>00.디스플레이캠페인이름-BA</td>
+                        <td>00.BA-디스플레이광고세트이름-CV-A-A-GGDA</td>
+                        <td>디스플레이광고주제-A-00-O-I-250429</td>
+                    </tr>
+                    <tr>
+                        <td>동영상</td>
+                        <td>00.동영상캠페인이름-CA</td>
+                        <td>00.CA-동영상광고세트이름-EG-A-A-GGDA</td>
+                        <td>동영상광고주제-A-00-O-V-250429</td>
+                    </tr>
+                    <tr>
+                        <td>디멘드젠</td>
+                        <td>00.디멘드젠캠페인이름-DA</td>
+                        <td>00.DA-디멘드젠광고세트이름-LD-A-A-GGDA</td>
+                        <td>디멘드젠광고주제-A-00-O-M-250429</td>
+                    </tr>
+                    <tr>
+                        <td>PMAX</td>
+                        <td>00.PMAX캠페인이름-EA</td>
+                        <td>00.EA-PMAX광고세트이름-MX-A-A-GGDA</td>
+                        <td></td>
+                        </td>
+                    </tr>
+                    <!-- 메타 -->
+                    <tr>
+                        <td colspan="2">메타</td>
+                        <td>00.메타캠페인이름-AA</td>
+                        <td>00.AA-메타광고세트이름-TR-A-A-MTTR</td>
+                        <td>메타광고주제-A-00-O-V-250429</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
     <script>
+        const viewBtn = document.getElementById('view_button');
+        const guideBox = document.getElementById('guide_box');
+
+        viewBtn.addEventListener("click", () => {
+            const isHidden = guideBox.classList.contains("hidden");
+            guideBox.classList.toggle("hidden");
+            viewBtn.textContent = isHidden ? "닫기" : "보기";
+        });
+
         const _UTMMAPPING = {
             NSPW: {
                 utm_source: "naver",
@@ -376,96 +595,6 @@
                 resultBox.textContent = "유효한 매체 유형이 아닙니다.";
             }
         }
-
-        // function createUtmUrl() {
-
-        //     const select = document.getElementById("ad_group_name_platform").value;
-        //     const resultBox = document.getElementById("utm_url_result");
-        //     const adGroupName = document.getElementById("ad_group_name_result").textContent.trim();
-        //     const adName = document.getElementById("ad_name_result").textContent.trim();
-
-        //     const keepTemplateCampaign = ["MTAR", "MTTR", "MTEG", "MTLD", "MTAP", "MTSL"];
-
-        //     if (_UTMMAPPING[select]) {
-        //         const utm = _UTMMAPPING[select];
-
-        //         const params = [];
-
-
-        //         const utm_campaign = keepTemplateCampaign.includes(select)
-        //             ? (utm.utm_campaign || "")
-        //             : (adGroupName || utm.utm_campaign || "");
-
-        //         // 핵심 수정: utm_content가 정의 안 돼 있으면 adName 사용
-        //         // let utm_content = "";
-        //         // if (keepTemplateCampaign.includes(select)) {
-        //         //     utm_content = utm.utm_content || "";
-        //         // } else {
-        //         //     utm_content = adName !== "" ? adName : "";
-        //         // }
-
-        //         const utm_content = keepTemplateCampaign.includes(select)
-        //             ? (utm.utm_content || "")
-        //             : (adName || utm.utm_content || "");
-
-
-        //         console.log(utm_content.trim())
-        //         console.log(utm_content.includes() !== "(여기에 출력됩니다)")
-
-
-        //         if (utm.utm_source) params.push(`utm_source=${utm.utm_source}`);
-        //         if (utm.utm_medium) params.push(`utm_medium=${utm.utm_medium}`);
-        //         if (utm_campaign) params.push(`utm_campaign=${utm_campaign}`);
-        //         if (utm_content.trim() !== "(여기에 출력됩니다)") params.push(`utm_content=${utm_content}`);
-        //         if (utm.utm_term) params.push(`utm_term=${utm.utm_term}`);
-        //         if (utm.utm_id) params.push(`utm_id=${utm.utm_id}`);
-
-        //         const url = params.join("&");
-        //         resultBox.textContent = url;
-
-        //         console.log("선택된 매체:", select);
-        //         console.log("ad_name_result:", adName);
-        //         console.log("utm_content 최종값:", utm_content);
-        //         console.log("params 최종:", params);
-        //     } else {
-        //         resultBox.textContent = "유효한 매체 유형이 아닙니다.";
-        //     }
-
-
-
-
-        //     // const select = document.getElementById("ad_group_name_platform").value;
-        //     // console.log(select)
-        //     // const resultBox = document.getElementById("utm_url_result");
-
-        //     // // 광고그룹명 값 가져오기
-        //     // // const adGroupName = document.getElementById("ad_group_name_result").textContent.trim();
-
-        //     // const adGroupNameRaw = document.getElementById("ad_group_name_result").textContent.trim();
-        //     // const adGroupName = adGroupNameRaw && adGroupNameRaw !== "(여기에 출력됩니다)" ? adGroupNameRaw : "";
-
-        //     // const adNameRaw = document.getElementById("ad_name_result").textContent.trim();
-        //     // const adName = adNameRaw && adNameRaw !== "(여기에 출력됩니다)" ? adNameRaw : "";
-
-
-
-        //     // if (_UTMMAPPING.hasOwnProperty(select)) {
-        //     //     const utm = _UTMMAPPING[select];
-
-        //     //     // 광고그룹명이 있으면 사용, 없으면 매핑된 기본 utm_campaign
-        //     //     const utm_campaign = adGroupName !== "" ? adGroupName : (utm.utm_campaign || "");
-        //     //     const utm_content = adName !== "" ? adName : (utm.utm_content || "");
-
-        //     //     const url = `utm_source=${utm.utm_source}&utm_medium=${utm.utm_medium}&utm_campaign=${utm_campaign}&utm_content=${utm_content}&utm_term=${utm.utm_term}&utm_id=${utm.utm_id}`;
-
-        //     //     resultBox.textContent = url;
-        //     // } else {
-        //     //     resultBox.textContent = "유효한 매체 유형이 아닙니다.";
-        //     // }
-
-        // }
-
-
     </script>
 </body>
 
