@@ -16,6 +16,10 @@
             padding: 20px;
         }
 
+        .col-form-label {
+            font-size: 14px;
+        }
+
         #create_campaign_name,
         #create_ad_group_name,
         #create_ad_name {
@@ -51,6 +55,9 @@
                 <button type="button" onclick="campaignOutput()" class="btn btn-dark btn-sm"
                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                     생성하기</button>
+            </div>
+            <div class="col-auto">
+                <pre id="campaign_name_result">(여기에 출력됩니다)</pre>
             </div>
         </div>
 
@@ -105,14 +112,14 @@
             </div>
         </div>
 
-        <div class="row align-items-center">
+        <!-- <div class="row align-items-center">
             <div class="col-auto">
                 <h3>캠페인명 결과:</h3>
             </div>
             <div class="col-auto">
                 <pre id="campaign_name_result">(여기에 출력됩니다)</pre>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div id="create_ad_group_name" class="container border border-secondary rounded-2">
@@ -124,6 +131,9 @@
                 <button type="button" onclick="adGroupOutput()" class="btn btn-dark btn-sm"
                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                     생성하기</button>
+            </div>
+            <div class="col-auto">
+                <pre id="ad_group_name_result">(여기에 출력됩니다)</pre>
             </div>
         </div>
 
@@ -150,7 +160,6 @@
                     <input type="text" id="ad_group_name_code" class="form-control form-control-sm"
                         placeholder="예: 00.브랜드-AA" disabled readonly>
                 </div>
-                <!-- 비활성화하고 캠페인명 결과값을 자동으로 입력하는 것으로 수정 필요 -->
                 <div class="col-auto">
                     <button type="button" class="btn btn-sm btn-danger"
                         style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
@@ -180,7 +189,7 @@
                 <div class="col-auto">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_group_name_type">핵심목표</label>
+                            <label for="ad_group_name_type" class="col-form-label">핵심목표</label>
                         </div>
                         <div class="col-auto">
                             <select id="ad_group_name_type" class="form-select form-select-sm"
@@ -201,7 +210,7 @@
                 <div class="col-auto">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_group_name_time">운영방식</label>
+                            <label for="ad_group_name_time" class="col-form-label">운영방식</label>
                         </div>
                         <div class="col-auto">
                             <select id="ad_group_name_time" class="form-select form-select-sm"
@@ -217,7 +226,7 @@
                 <div class="col-auto">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_group_name_device">디바이스</label>
+                            <label for="ad_group_name_device" class="col-form-label">디바이스</label>
                         </div>
                         <div class="col-auto">
                             <select id="ad_group_name_device" class="form-select form-select-sm"
@@ -235,7 +244,7 @@
                 <div class="col-auto">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_group_name_platform">매체/유형</label>
+                            <label for="ad_group_name_platform" class="col-form-label">매체/유형</label>
                         </div>
                         <div class="col-auto">
                             <select id="ad_group_name_platform" class="form-select form-select-sm"
@@ -277,7 +286,7 @@
                 <div id="ad_group_name_pc" class="col-auto d-none">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_group_name_pc_placement">PC 네이버 브랜드 검색 클릭위치</label>
+                            <label for="ad_group_name_pc_placement" class="col-form-label">PC 네이버 브랜드 검색 클릭위치</label>
                         </div>
                         <div class="col-auto">
                             <select id="ad_group_name_pc_placement" class="form-select form-select-sm"
@@ -308,7 +317,7 @@
                 <div id="ad_group_name_mo" class="col-auto d-none">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_group_name_mo_placement">모바일 네이버 브랜드 검색 클릭위치</label>
+                            <label for="ad_group_name_mo_placement" class="col-form-label">모바일 네이버 브랜드 검색 클릭위치</label>
                         </div>
                         <div class="col-auto">
                             <select id="ad_group_name_mo_placement" class="form-select form-select-sm"
@@ -338,14 +347,14 @@
             </div>
         </div>
 
-        <div class="row align-items-center">
+        <!-- <div class="row align-items-center">
             <div class="col-auto">
                 <h3>광고그룹명 결과:</h3>
             </div>
             <div class="col-auto">
                 <pre id="ad_group_name_result">(여기에 출력됩니다)</pre>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div id="create_ad_name" class="container border border-secondary rounded-2">
@@ -357,6 +366,9 @@
                 <button type="button" onclick="adOutput()" class="btn btn-dark btn-sm"
                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
                     생성하기</button>
+            </div>
+            <div class="col-auto">
+                <pre id="ad_name_result">(여기에 출력됩니다)</pre>
             </div>
         </div>
 
@@ -411,7 +423,7 @@
                 <div class="col-auto">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_name_deliberate">심의정보</label>
+                            <label for="ad_name_deliberate" class="col-form-label">심의정보</label>
                         </div>
                         <div class="col-auto">
                             <select id="ad_name_deliberate" class="form-select form-select-sm"
@@ -427,7 +439,7 @@
                 <div class="col-auto">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_name_type">소재유형</label>
+                            <label for="ad_name_type" class="col-form-label">소재유형</label>
                         </div>
                         <div class="col-auto">
                             <select id="ad_name_type" class="form-select form-select-sm" aria-label="ad name type">
@@ -442,7 +454,7 @@
                 <div class="col-auto">
                     <div class="row g-2 align-items-center">
                         <div class="col-auto">
-                            <label for="ad_name_date">날짜</label>
+                            <label for="ad_name_date" class="col-form-label">날짜</label>
                         </div>
                         <div class="col-auto">
                             <input type="date" id="ad_name_date" class="form-control form-control-sm"
@@ -456,14 +468,14 @@
             </div>
         </div>
 
-        <div class="row align-items-center">
+        <!-- <div class="row align-items-center">
             <div class="col-auto">
                 <h3>광고/에셋명 결과:</h3>
             </div>
             <div class="col-auto">
                 <pre id="ad_name_result">(여기에 출력됩니다)</pre>
             </div>
-        </div>
+        </div> -->
     </div>
 
     <div id="create_utm_url">
