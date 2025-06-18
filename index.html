@@ -264,6 +264,14 @@
                                 <!-- <option value="MBPC">모비온 가망고객</option> -->
                                 <option value="CTCA">크리테오 신규고객</option>
                                 <option value="CTRT">크리테오 리타겟팅</option>
+                                <option value="TTRC">틱톡 도달</option>
+                                <option value="TTTR">틱톡 트래픽</option>
+                                <option value="TTVV">틱톡 비디오조회수</option>
+                                <option value="TTLD">틱톡 리드</option>
+                                <option value="TTEG">틱톡 참여</option>
+                                <option value="TTAP">틱톡 앱 프로모션</option>
+                                <option value="TTCV">틱톡 웹사이트 전환</option>
+                                <option value="TTSL">틱톡 판매</option>
                             </select>
                         </div>
                     </div>
@@ -617,6 +625,18 @@
                         <td>utm_source={{site_source_name}}&utm_medium=paid_social&utm_campaign={{adset.name}}&utm_content={{ad.name}}-{{placement}}&utm_id={{ad.id}}
                         </td>
                     </tr>
+                    <!-- 틱톡 -->
+                    <tr>
+                        <td colspan="2">틱톡</td>
+                        <td>tiktok</td>
+                        <td>paid_social</td>
+                        <td>__AID_NAME__</td>
+                        <td>__CID_NAME__</td>
+                        <td></td>
+                        <td>__CID__</td>
+                        <td>utm_source=tiktok&utm_medium=paid_social&utm_campaign=__AID_NAME__&utm_content=__CID_NAME__&utm_id=__CID__
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -708,6 +728,13 @@
                         <td>00.메타캠페인이름-AA</td>
                         <td>00.AA-메타광고세트이름-TR-A-A-MTTR</td>
                         <td>메타광고주제-A-00-O-V-250429</td>
+                    </tr>
+                    <!-- 틱톡 -->
+                    <tr>
+                        <td colspan="2">틱톡</td>
+                        <td>00.틱톡캠페인이름-AA</td>
+                        <td>00.AA-틱톡광고세트이름-TR-A-A-TTTR</td>
+                        <td>틱톡광고주제-A-00-O-V-250429</td>
                     </tr>
                 </tbody>
             </table>
@@ -816,6 +843,62 @@
                 utm_source: "criteo",
                 utm_medium: "display",
                 utm_id: "{{adid}}"
+            },
+            TTRC: {
+                utm_source: "tiktok",
+                utm_medium: "paid_social",
+                utm_campaign: "__AID_NAME__",
+                utm_content: "__CID_NAME__",
+                utm_id: "__CID__"
+            },
+            TTTR: {
+                utm_source: "tiktok",
+                utm_medium: "paid_social",
+                utm_campaign: "__AID_NAME__",
+                utm_content: "__CID_NAME__",
+                utm_id: "__CID__"
+            },
+            TTVV: {
+                utm_source: "tiktok",
+                utm_medium: "paid_social",
+                utm_campaign: "__AID_NAME__",
+                utm_content: "__CID_NAME__",
+                utm_id: "__CID__"
+            },
+            TTLD: {
+                utm_source: "tiktok",
+                utm_medium: "paid_social",
+                utm_campaign: "__AID_NAME__",
+                utm_content: "__CID_NAME__",
+                utm_id: "__CID__"
+            },
+            TTEG: {
+                utm_source: "tiktok",
+                utm_medium: "paid_social",
+                utm_campaign: "__AID_NAME__",
+                utm_content: "__CID_NAME__",
+                utm_id: "__CID__"
+            },
+            TTAP: {
+                utm_source: "tiktok",
+                utm_medium: "paid_social",
+                utm_campaign: "__AID_NAME__",
+                utm_content: "__CID_NAME__",
+                utm_id: "__CID__"
+            },
+            TTCV: {
+                utm_source: "tiktok",
+                utm_medium: "paid_social",
+                utm_campaign: "__AID_NAME__",
+                utm_content: "__CID_NAME__",
+                utm_id: "__CID__"
+            },
+            TTSL: {
+                utm_source: "tiktok",
+                utm_medium: "paid_social",
+                utm_campaign: "__AID_NAME__",
+                utm_content: "__CID_NAME__",
+                utm_id: "__CID__"
             },
         }
 
