@@ -604,7 +604,7 @@
                         <td>PMAX</td>
                         <td>google</td>
                         <td>cpc</td>
-                        <td>광고그룹명</td>
+                        <td>캠페인명</td>
                         <td>에셋그룹명</td>
                         <td></td>
                         <td>에셋그룹ID - 수동입력</td>
@@ -990,8 +990,9 @@
             document.getElementById("status_message").textContent = "";
 
             const select = document.getElementById("ad_group_name_platform").value;
-            console.log(select)
+            // console.log(select)
             const resultBox = document.getElementById("utm_url_result");
+            const campaignName = document.getElementById("campaign_name_result").textContent.trim();
             const adGroupName = document.getElementById("ad_group_name_result").textContent.trim();
             const adName = document.getElementById("ad_name_result").textContent.trim();
 
@@ -1016,9 +1017,15 @@
                 if (utm.utm_source) params.push(`utm_source=${utm.utm_source}`);
                 if (utm.utm_medium) params.push(`utm_medium=${utm.utm_medium}`);
 
+                // utm_campaign: _UTMMAPPING에 있으면 그 값, 없으면 adGroupName (단 google PMAX의 경우 campaignName)
+                let utm_campaign;
 
-                // utm_campaign: _UTMMAPPING에 있으면 그 값, 없으면 adGroupName
-                let utm_campaign = utm.utm_campaign !== undefined ? utm.utm_campaign : adGroupName;
+                if (select === "GGPX") {
+                    utm_campaign = campaignName;
+                } else {
+                    utm_campaign = utm.utm_campaign !== undefined ? utm.utm_campaign : adGroupName;
+                }
+
                 if (utm_campaign) params.push(`utm_campaign=${utm_campaign}`);
 
                 // utm_content: _UTMMAPPING에 있으면 그 값, 없으면 adName
