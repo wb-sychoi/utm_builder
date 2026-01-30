@@ -11,490 +11,678 @@
 
     <title>UTM BUILDER</title>
     <style>
+        /* 🎨 UTM Builder Modern Minimal Redesign */
+
         body {
-            width: 100%;
-            padding: 20px;
+            background: #f9fafb;
+            color: #1e293b;
+            font-family: "Pretendard", "Noto Sans KR", sans-serif;
+
+            display: flex;
+            flex-direction: column;
+
+            /* 핵심: 가운데 → 왼쪽 */
+            align-items: flex-start;
+
+            /* 좌측 여백은 원하시는 값으로 */
+            padding: 60px 0 60px 60px;
+        }
+
+        #header {
+            width: 800px;
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+
+        #header>h1 {
+            font-weight: 700;
+            font-size: 36px;
+            color: #111827;
+        }
+
+        #header>p {
+            font-size: 12px;
+            color: #6b7280;
+            line-height: 1.6;
+        }
+
+        h3 {
+            font-weight: 600;
+            font-size: 16px;
+            margin: 0;
+            color: #111827;
+        }
+
+        /* 각 빌더 블록 */
+        .container.border {
+            background: #fff;
+            border: 1px solid #e5e7eb !important;
+            border-radius: 14px !important;
+            padding: 28px 36px !important;
+            width: 800px !important;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        /* 입력 영역 정리 */
+        input.form-control,
+        select.form-select {
+            border: 1px solid #d1d5db !important;
+            border-radius: 10px !important;
+            background: #fafafa !important;
+            transition: border-color 0.2s ease, background-color 0.2s ease;
+        }
+
+        input.form-control:focus,
+        select.form-select:focus {
+            border-color: #2563eb !important;
+            background: #fff !important;
+            box-shadow: 0 0 0 0.15rem rgba(37, 99, 235, 0.15) !important;
         }
 
         .col-form-label {
-            font-size: 14px;
+            font-size: 13px;
+            color: #374151;
         }
 
-        #create_campaign_name,
-        #create_ad_group_name,
-        #create_ad_name {
-            margin: 10px;
-            padding: 10px;
-            border: 2px solid black;
-            width: 1200px;
+        /* 버튼 */
+        .btn-dark {
+            background: #1e293b !important;
+            border: none !important;
+            border-radius: 8px !important;
+            transition: all 0.2s ease-in-out;
         }
 
+        .btn-dark:hover {
+            background: #111827 !important;
+        }
+
+        .btn-danger {
+            background: #ef4444 !important;
+            border: none !important;
+            border-radius: 8px !important;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626 !important;
+        }
+
+        /* 출력 영역 */
+        pre {
+            background: #f3f4f6;
+            border: 1px dashed #d1d5db;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-family: "JetBrains Mono", monospace;
+            color: #374151;
+        }
+
+        /* 테이블 */
         .table_box {
-            font-size: 12px;
+            width: 800px !important;
+            border-radius: 10px !important;
+            overflow: hidden;
+            font-size: 13px;
         }
 
-        .example_text {
-            font-size: 14px;
+        .table caption {
+            caption-side: top;
+            font-weight: 600;
+            color: #111827;
+            padding: 8px;
         }
 
+        .table-dark th {
+            background-color: #111827 !important;
+            border: none !important;
+        }
+
+        .table-hover tbody tr:hover {
+            background-color: #f9fafb !important;
+        }
+
+        /* Guide 토글 */
         .hidden {
-            display: none;
+            display: none !important;
+        }
+
+        #guide_box {
+            margin-top: 40px;
+            width: 800px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 28px 36px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        /* 전체 버튼 배치 및 정렬 */
+        #view_button {
+            margin-left: 10px;
+        }
+
+        .result-label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 4px;
+        }
+
+        .result-box {
+            background-color: #f9fafb;
+            border: 1px dashed #d1d5db;
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 12.5px;
+            color: #6b7280;
+            line-height: 1.4;
+            font-family: "JetBrains Mono", monospace;
+        }
+
+        #create_utm_url {
+            width: 800px;
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            padding: 28px 36px;
+            margin-bottom: 24px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+        }
+
+        .section-wrap {
+            width: 800px;
+            /* 위 박스랑 동일하게 */
+            margin: 0 auto 24px;
+            /* 가운데 배치 + 아래 간격 */
         }
     </style>
 </head>
 
 <body>
-    <h1>BUILDER</h1>
+    <div class="section-wrap">
+        <div id="header">
+            <h1>BUILDER</h1>
+            <p>💡현재 베타 버전으로 오류가 있을 수 있습니다.<br>오류 있을 경우 문의부탁드리겠습니다.</p>
+        </div>
 
-    <div id="create_campaign_name" class="container border border-secondary rounded-2">
-        <div class="row">
-            <div class="col-auto">
-                <h3>캠페인명 생성하기 <span class="example_text">| 예: 00.브랜드-AA</span></h3>
+
+        <div id="create_campaign_name" class="container border border-secondary rounded-2">
+            <div class="row">
+                <div class="col-auto">
+                    <h3>캠페인명 생성하기 <span class="example_text">| 예: 00.브랜드-AA</span></h3>
+                </div>
+                <div class="col-auto">
+                    <button type="button" onclick="campaignOutput()" class="btn btn-dark btn-sm"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                        생성하기</button>
+                </div>
             </div>
-            <div class="col-auto">
-                <button type="button" onclick="campaignOutput()" class="btn btn-dark btn-sm"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    생성하기</button>
+
+            <div class="container text-left">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="campaign_name_number" class="col-form-label">순번</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="campaign_name_number" class="form-control form-control-sm"
+                            placeholder="00">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="2자리 숫자로 입력해야 하며 첫 시작은 00입니다.">
+                            입력가이드
+                        </button>
+                    </div>
+                </div>
+
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="campaign_name_title" class="col-form-label">캠페인명</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="campaign_name_title" class="form-control form-control-sm"
+                            placeholder="{아이템}_{아이템}_...">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="캠페인 주제에 해당하는 내용을 설정하고 띄어쓰기가 필요할 경우 언더바 _ 로 설정해야 합니다. (띄어쓰기 금지)">입력가이드</button>
+                    </div>
+                </div>
+
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="campaign_name_code" class="col-form-label">코드</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="campaign_name_code" class="form-control form-control-sm"
+                            placeholder="AA~AZ, A0~A9, BA~BZ, ...">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="고유한 코드값이 설정되어야 하며 A-Z까지 두자리로 설정해야 합니다. 수량이 많은 경우 Z다음에 0-9까지 사용 가능합니다.">입력가이드</button>
+                    </div>
+                </div>
             </div>
-            <div class="col-auto">
-                <pre id="campaign_name_result">(여기에 출력됩니다)</pre>
+            <!-- 코드 입력 행 바로 아래에 추가 -->
+            <div class="col-12 mt-3">
+                <label class="result-label">결과명</label>
+                <pre id="campaign_name_result" class="result-box">(여기에 출력됩니다)</pre>
             </div>
         </div>
 
-        <div class="container text-left">
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="campaign_name_number" class="col-form-label">순번</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="campaign_name_number" class="form-control form-control-sm" placeholder="00">
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="2자리 숫자로 입력해야 하며 첫 시작은 00입니다.">
-                        입력가이드
-                    </button>
-                </div>
-            </div>
 
-            <div class="row g-3 align-items-center">
+        <div id="create_ad_group_name" class="container border border-secondary rounded-2">
+            <div class="row">
                 <div class="col-auto">
-                    <label for="campaign_name_title" class="col-form-label">캠페인명</label>
+                    <h3>광고그룹명 생성하기 <span class="example_text">| 예: 00.AA-자사몰_일반-BR-A-M-NSPW</span></h3>
                 </div>
                 <div class="col-auto">
-                    <input type="text" id="campaign_name_title" class="form-control form-control-sm"
-                        placeholder="{아이템}_{아이템}_...">
+                    <button type="button" onclick="adGroupOutput()" class="btn btn-dark btn-sm"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                        생성하기</button>
                 </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="캠페인 주제에 해당하는 내용을 설정하고 띄어쓰기가 필요할 경우 언더바 _ 로 설정해야 합니다. (띄어쓰기 금지)">입력가이드</button>
-                </div>
-            </div>
-
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="campaign_name_code" class="col-form-label">코드</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="campaign_name_code" class="form-control form-control-sm"
-                        placeholder="AA~AZ, A0~A9, BA~BZ, ...">
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="고유한 코드값이 설정되어야 하며 A-Z까지 두자리로 설정해야 합니다. 수량이 많은 경우 Z다음에 0-9까지 사용 가능합니다.">입력가이드</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="create_ad_group_name" class="container border border-secondary rounded-2">
-        <div class="row">
-            <div class="col-auto">
-                <h3>광고그룹명 생성하기 <span class="example_text">| 예: 00.AA-자사몰_일반-BR-A-M-NSPW</span></h3>
-            </div>
-            <div class="col-auto">
-                <button type="button" onclick="adGroupOutput()" class="btn btn-dark btn-sm"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    생성하기</button>
-            </div>
-            <div class="col-auto">
+                <!-- <div class="col-auto">
                 <pre id="ad_group_name_result">(여기에 출력됩니다)</pre>
+            </div> -->
+            </div>
+
+            <div class="container text-left">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="ad_group_name_number" class="col-form-label">순번</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="ad_group_name_number" class="form-control form-control-sm"
+                            placeholder="00">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="2자리 숫자로 입력해야 하며 첫 시작은 00입니다.">입력가이드</button>
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="ad_group_name_code" class="col-form-label">캠페인 코드 자동 추출</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="ad_group_name_code" class="form-control form-control-sm"
+                            placeholder="예: 00.브랜드-AA" disabled readonly>
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="위에서 생성된 캠페인명이 자동으로 입력됩니다.">입력가이드</button>
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="ad_group_name_title" class="col-form-label">광고그룹명</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="ad_group_name_title" class="form-control form-control-sm"
+                            placeholder="{아이템}_{아이템}_...">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="광고그룹과 관련된 내용을 설정하고 띄어쓰기가 필요할 경우 언더바 _ 로 설정해야 합니다. (띄어쓰기 금지)">입력가이드</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_group_name_type" class="col-form-label">핵심목표</label>
+                            </div>
+                            <div class="col-auto">
+                                <select id="ad_group_name_type" class="form-select form-select-sm"
+                                    aria-label="ad group name type">
+                                    <option selected value="">-- 필수선택 --</option>
+                                    <option value="AR">인지도</option>
+                                    <option value="BR">브랜딩</option>
+                                    <option value="CA">신규</option>
+                                    <option value="CV">전환</option>
+                                    <option value="SL">판매</option>
+                                    <option value="LD">리드</option>
+                                    <option value="TR">트래픽</option>
+                                    <option value="EG">참여</option>
+                                    <option value="RT">리타게팅</option>
+                                    <option value="DT">디타게팅</option>
+                                    <option value="PM">프로모션</option>
+                                    <option value="VV">비디오조회</option>
+                                    <option value="MX">혼합</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_group_name_time" class="col-form-label">운영방식</label>
+                            </div>
+                            <div class="col-auto">
+                                <select id="ad_group_name_time" class="form-select form-select-sm"
+                                    aria-label="ad group name time">
+                                    <option selected value="">-- 필수선택 --</option>
+                                    <option value="A">상시</option>
+                                    <option value="T">일시</option>
+                                    <option value="R">정기</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_group_name_device" class="col-form-label">디바이스</label>
+                            </div>
+                            <div class="col-auto">
+                                <select id="ad_group_name_device" class="form-select form-select-sm"
+                                    aria-label="ad group name device">
+                                    <option selected value="">-- 필수선택 --</option>
+                                    <option value="A">전체</option>
+                                    <option value="M">모바일</option>
+                                    <option value="P">데스크톱</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_group_name_platform" class="col-form-label">매체/유형</label>
+                            </div>
+                            <div class="col-auto">
+                                <select id="ad_group_name_platform" class="form-select form-select-sm"
+                                    aria-label="ad group name platform">
+                                    <option selected value="">-- 필수선택 --</option>
+                                    <option value="NSPW">네이버 파워링크</option>
+                                    <option value="NSSP">네이버 쇼핑검색</option>
+                                    <option value="NSBR">네이버 브랜드검색</option>
+                                    <option value="NSPC">네이버 파워콘텐츠</option>
+                                    <option value="NSPL">네이버 플레이스</option>
+                                    <option value="GGSA">구글 검색</option>
+                                    <option value="GGDA">구글 디스플레이</option>
+                                    <option value="GGDG">구글 디멘드젠</option>
+                                    <option value="GGVA">구글 동영상</option>
+                                    <option value="GGPX">구글 PMAX</option>
+                                    <option value="MTAR">메타 인지도</option>
+                                    <option value="MTTR">메타 트래픽</option>
+                                    <option value="MTEG">메타 참여</option>
+                                    <option value="MTLD">메타 리드(잠재고객)</option>
+                                    <option value="MTAP">메타 앱 홍보</option>
+                                    <option value="MTSL">메타 판매</option>
+                                    <!-- <option value="MBRS">모비온 쇼핑</option> -->
+                                    <!-- <option value="MBDB">모비온 DB전환</option> -->
+                                    <!-- <option value="MBTR">모비온 유입</option> -->
+                                    <!-- <option value="MBBR">모비온 브랜딩</option> -->
+                                    <!-- <option value="MBPC">모비온 가망고객</option> -->
+                                    <option value="CTCA">크리테오 신규고객</option>
+                                    <option value="CTRT">크리테오 리타겟팅</option>
+                                    <option value="TTRC">틱톡 도달</option>
+                                    <option value="TTTR">틱톡 트래픽</option>
+                                    <option value="TTVV">틱톡 비디오조회수</option>
+                                    <option value="TTLD">틱톡 리드</option>
+                                    <option value="TTEG">틱톡 참여</option>
+                                    <option value="TTAP">틱톡 앱 프로모션</option>
+                                    <option value="TTCV">틱톡 웹사이트 전환</option>
+                                    <option value="TTSL">틱톡 판매</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <div class="row">
+                    <!-- 1. 네이버 브랜드 검색 선택시 2. 디바이스 PC 선택 시 활성화 -->
+                    <div id="ad_group_name_pc" class="col-auto d-none">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_group_name_pc_placement" class="col-form-label">PC 네이버 브랜드 검색
+                                    클릭위치</label>
+                            </div>
+                            <div class="col-auto">
+                                <select id="ad_group_name_pc_placement" class="form-select form-select-sm"
+                                    aria-label="ad group name pc placement">
+                                    <option selected value="">-- 필수선택 --</option>
+                                    <option value="homelink">홈 링크</option>
+                                    <option value="brandnews">브랜드소식</option>
+                                    <option value="main_image">메인 콘텐츠</option>
+                                    <option value="main_text">텍스트 링크</option>
+                                    <option value="sublink_1">서브링크1</option>
+                                    <option value="sublink_2">서브링크2</option>
+                                    <option value="sublink_3">서브링크3</option>
+                                    <option value="sublink_4">서브링크4</option>
+                                    <option value="thumbnail_1">썸네일1</option>
+                                    <option value="thumbnail_2">썸네일2</option>
+                                    <option value="thumbnail_3">썸네일3</option>
+                                    <option value="dynamic_1">다이나믹 썸네일1</option>
+                                    <option value="dynamic_2">다이나믹 썸네일2</option>
+                                    <option value="dynamic_3">다이나믹 썸네일3</option>
+                                    <option value="dynamic_4">다이나믹 썸네일4</option>
+                                    <option value="dynamic_5">다이나믹 썸네일5</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1. 네이버 브랜드 검색 선택시 2. 디바이스 모바일 선택 시 활성화 -->
+                    <div id="ad_group_name_mo" class="col-auto d-none">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_group_name_mo_placement" class="col-form-label">모바일 네이버 브랜드 검색
+                                    클릭위치</label>
+                            </div>
+                            <div class="col-auto">
+                                <select id="ad_group_name_mo_placement" class="form-select form-select-sm"
+                                    aria-label="ad group name mo placement">
+                                    <option selected value="">-- 필수선택 --</option>
+                                    <option value="homelink">홈 링크</option>
+                                    <option value="brandnews">브랜드소식</option>
+                                    <option value="main_image">메인 콘텐츠</option>
+                                    <option value="main_text">텍스트 링크</option>
+                                    <option value="thumbnail_1">썸네일1</option>
+                                    <option value="thumbnail_2">썸네일2</option>
+                                    <option value="thumbnail_3">썸네일3</option>
+                                    <option value="btn_1">버튼1</option>
+                                    <option value="btn_2">버튼2</option>
+                                    <option value="btn_3">버튼3</option>
+                                    <option value="btn_4">버튼4</option>
+                                    <option value="tab1_th1">다이나믹 썸네일 탭1-썸네일1</option>
+                                    <option value="tab1_th2">다이나믹 썸네일 탭1-썸네일2</option>
+                                    <option value="tab1_th3">다이나믹 썸네일 탭1-썸네일3</option>
+                                    <option value="tab2_th1">다이나믹 썸네일 탭2-썸네일1</option>
+                                    <option value="tab2_th2">다이나믹 썸네일 탭2-썸네일2</option>
+                                    <option value="tab2_th3">다이나믹 썸네일 탭2-썸네일3</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 코드 입력 행 바로 아래에 추가 -->
+            <div class="col-12 mt-3">
+                <label class="result-label">결과명</label>
+                <pre id="ad_group_name_result" class="result-box">(여기에 출력됩니다)</pre>
             </div>
         </div>
 
-        <div class="container text-left">
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="ad_group_name_number" class="col-form-label">순번</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="ad_group_name_number" class="form-control form-control-sm" placeholder="00">
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="2자리 숫자로 입력해야 하며 첫 시작은 00입니다.">입력가이드</button>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="ad_group_name_code" class="col-form-label">캠페인 코드 자동 추출</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="ad_group_name_code" class="form-control form-control-sm"
-                        placeholder="예: 00.브랜드-AA" disabled readonly>
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="위에서 생성된 캠페인명이 자동으로 입력됩니다.">입력가이드</button>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="ad_group_name_title" class="col-form-label">광고그룹명</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="ad_group_name_title" class="form-control form-control-sm"
-                        placeholder="{아이템}_{아이템}_...">
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="광고그룹과 관련된 내용을 설정하고 띄어쓰기가 필요할 경우 언더바 _ 로 설정해야 합니다. (띄어쓰기 금지)">입력가이드</button>
-                </div>
-            </div>
-        </div>
-
-        <div class="container text-center">
+        <div id="create_ad_name" class="container border border-secondary rounded-2">
             <div class="row">
                 <div class="col-auto">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_group_name_type" class="col-form-label">핵심목표</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="ad_group_name_type" class="form-select form-select-sm"
-                                aria-label="ad group name type">
-                                <option selected value="">-- 필수선택 --</option>
-                                <option value="BR">브랜딩</option>
-                                <option value="CV">전환</option>
-                                <option value="LD">리드</option>
-                                <option value="TR">트래픽</option>
-                                <option value="EG">참여</option>
-                                <option value="RT">리타게팅</option>
-                                <option value="PM">프로모션</option>
-                                <option value="MX">혼합</option>
-                            </select>
-                        </div>
-                    </div>
+                    <h3>광고/에셋명 생성하기 <span class="example_text">| 예: 자려한_코성형-A-00-Y-I-250529</span></h3>
                 </div>
                 <div class="col-auto">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_group_name_time" class="col-form-label">운영방식</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="ad_group_name_time" class="form-select form-select-sm"
-                                aria-label="ad group name time">
-                                <option selected value="">-- 필수선택 --</option>
-                                <option value="A">상시</option>
-                                <option value="T">일시</option>
-                                <option value="R">정기</option>
-                            </select>
-                        </div>
-                    </div>
+                    <button type="button" onclick="adOutput()" class="btn btn-dark btn-sm"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                        생성하기</button>
                 </div>
-                <div class="col-auto">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_group_name_device" class="col-form-label">디바이스</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="ad_group_name_device" class="form-select form-select-sm"
-                                aria-label="ad group name device">
-                                <option selected value="">-- 필수선택 --</option>
-                                <option value="A">전체</option>
-                                <option value="M">모바일</option>
-                                <option value="P">데스크톱</option>
-                                <option value="T">테블릿</option>
-                                <option value="V">영상기기(TV)</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_group_name_platform" class="col-form-label">매체/유형</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="ad_group_name_platform" class="form-select form-select-sm"
-                                aria-label="ad group name platform">
-                                <option selected value="">-- 필수선택 --</option>
-                                <option value="NSPW">네이버 파워링크</option>
-                                <option value="NSSP">네이버 쇼핑검색</option>
-                                <option value="NSBR">네이버 브랜드검색</option>
-                                <option value="NSPC">네이버 파워콘텐츠</option>
-                                <option value="NSPL">네이버 플레이스</option>
-                                <option value="GGSA">구글 검색</option>
-                                <option value="GGDA">구글 디스플레이</option>
-                                <option value="GGDG">구글 디멘드젠</option>
-                                <option value="GGVA">구글 동영상</option>
-                                <option value="GGPX">구글 PMAX</option>
-                                <option value="MTAR">메타 인지도</option>
-                                <option value="MTTR">메타 트래픽</option>
-                                <option value="MTEG">메타 참여</option>
-                                <option value="MTLD">메타 리드(잠재고객)</option>
-                                <option value="MTAP">메타 앱 홍보</option>
-                                <option value="MTSL">메타 판매</option>
-                                <!-- <option value="MBRS">모비온 쇼핑</option> -->
-                                <!-- <option value="MBDB">모비온 DB전환</option> -->
-                                <!-- <option value="MBTR">모비온 유입</option> -->
-                                <!-- <option value="MBBR">모비온 브랜딩</option> -->
-                                <!-- <option value="MBPC">모비온 가망고객</option> -->
-                                <option value="CTCA">크리테오 신규고객</option>
-                                <option value="CTRT">크리테오 리타겟팅</option>
-                                <option value="TTRC">틱톡 도달</option>
-                                <option value="TTTR">틱톡 트래픽</option>
-                                <option value="TTVV">틱톡 비디오조회수</option>
-                                <option value="TTLD">틱톡 리드</option>
-                                <option value="TTEG">틱톡 참여</option>
-                                <option value="TTAP">틱톡 앱 프로모션</option>
-                                <option value="TTCV">틱톡 웹사이트 전환</option>
-                                <option value="TTSL">틱톡 판매</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container text-center">
-            <div class="row">
-                <!-- 1. 네이버 브랜드 검색 선택시 2. 디바이스 PC 선택 시 활성화 -->
-                <div id="ad_group_name_pc" class="col-auto d-none">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_group_name_pc_placement" class="col-form-label">PC 네이버 브랜드 검색 클릭위치</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="ad_group_name_pc_placement" class="form-select form-select-sm"
-                                aria-label="ad group name pc placement">
-                                <option selected value="">-- 필수선택 --</option>
-                                <option value="homelink">홈 링크</option>
-                                <option value="brandnews">브랜드소식</option>
-                                <option value="main_image">메인 콘텐츠</option>
-                                <option value="main_text">텍스트 링크</option>
-                                <option value="sublink_1">서브링크1</option>
-                                <option value="sublink_2">서브링크2</option>
-                                <option value="sublink_3">서브링크3</option>
-                                <option value="sublink_4">서브링크4</option>
-                                <option value="thumbnail_1">썸네일1</option>
-                                <option value="thumbnail_2">썸네일2</option>
-                                <option value="thumbnail_3">썸네일3</option>
-                                <option value="dynamic_1">다이나믹 썸네일1</option>
-                                <option value="dynamic_2">다이나믹 썸네일2</option>
-                                <option value="dynamic_3">다이나믹 썸네일3</option>
-                                <option value="dynamic_4">다이나믹 썸네일4</option>
-                                <option value="dynamic_5">다이나믹 썸네일5</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 1. 네이버 브랜드 검색 선택시 2. 디바이스 모바일 선택 시 활성화 -->
-                <div id="ad_group_name_mo" class="col-auto d-none">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_group_name_mo_placement" class="col-form-label">모바일 네이버 브랜드 검색 클릭위치</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="ad_group_name_mo_placement" class="form-select form-select-sm"
-                                aria-label="ad group name mo placement">
-                                <option selected value="">-- 필수선택 --</option>
-                                <option value="homelink">홈 링크</option>
-                                <option value="brandnews">브랜드소식</option>
-                                <option value="main_image">메인 콘텐츠</option>
-                                <option value="main_text">텍스트 링크</option>
-                                <option value="thumbnail_1">썸네일1</option>
-                                <option value="thumbnail_2">썸네일2</option>
-                                <option value="thumbnail_3">썸네일3</option>
-                                <option value="btn_1">버튼1</option>
-                                <option value="btn_2">버튼2</option>
-                                <option value="btn_3">버튼3</option>
-                                <option value="btn_4">버튼4</option>
-                                <option value="tab1_th1">다이나믹 썸네일 탭1-썸네일1</option>
-                                <option value="tab1_th2">다이나믹 썸네일 탭1-썸네일2</option>
-                                <option value="tab1_th3">다이나믹 썸네일 탭1-썸네일3</option>
-                                <option value="tab2_th1">다이나믹 썸네일 탭2-썸네일1</option>
-                                <option value="tab2_th2">다이나믹 썸네일 탭2-썸네일2</option>
-                                <option value="tab2_th3">다이나믹 썸네일 탭2-썸네일3</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="create_ad_name" class="container border border-secondary rounded-2">
-        <div class="row">
-            <div class="col-auto">
-                <h3>광고/에셋명 생성하기 <span class="example_text">| 예: 자려한_코성형-A-00-Y-I-250529</span></h3>
-            </div>
-            <div class="col-auto">
-                <button type="button" onclick="adOutput()" class="btn btn-dark btn-sm"
-                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    생성하기</button>
-            </div>
-            <div class="col-auto">
+                <!-- <div class="col-auto">
                 <pre id="ad_name_result">(여기에 출력됩니다)</pre>
+            </div> -->
+            </div>
+
+            <div class="container text-left">
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="ad_name_title" class="col-form-label">소재명</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="ad_name_title" class="form-control form-control-sm"
+                            placeholder="{주제1}_{주제1.1}_{주제1.1.1}">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="소재와 관련된 내용을 설정하고 띄어쓰기가 필요할 경우 언더바 _ 로 설정해야 합니다. (띄어쓰기 금지)">입력가이드</button>
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="ad_name_ab_test" class="col-form-label">A/B테스트</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="ad_name_ab_test" class="form-control form-control-sm"
+                            placeholder="A or B">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="A/B 테스트 진행 시 대문자로 기입해야 합니다. (미진행 시 기본값 A)">입력가이드</button>
+                    </div>
+                </div>
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="ad_name_version" class="col-form-label">버전</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="text" id="ad_name_version" class="form-control form-control-sm" placeholder="00">
+                    </div>
+                    <div class="col-auto">
+                        <button type="button" class="btn btn-sm btn-danger"
+                            style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+                            data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
+                            data-bs-content="2자리 숫자로 입력해야 하며 첫 시작은 00입니다.">입력가이드</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container text-center">
+                <div class="row">
+                    <div class="col-auto">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_name_deliberate" class="col-form-label">심의정보</label>
+                            </div>
+                            <div class="col-auto">
+                                <select id="ad_name_deliberate" class="form-select form-select-sm"
+                                    aria-label="ad name deliberate">
+                                    <option selected value="">-- 필수선택 --</option>
+                                    <option value="O">일반</option>
+                                    <option value="Y">심의완료</option>
+                                    <option value="N">비심의</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_name_type" class="col-form-label">소재유형</label>
+                            </div>
+                            <div class="col-auto">
+                                <select id="ad_name_type" class="form-select form-select-sm" aria-label="ad name type">
+                                    <option selected value="">-- 필수선택 --</option>
+                                    <option value="I">이미지</option>
+                                    <option value="V">영상</option>
+                                    <option value="M">복합</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-auto">
+                                <label for="ad_name_date" class="col-form-label">날짜</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="date" id="ad_name_date" class="form-control form-control-sm"
+                                    aria-label="ad name date">
+                            </div>
+                            <div class="col-auto">
+                                <span id="ad_name_date_result"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 코드 입력 행 바로 아래에 추가 -->
+            <div class="col-12 mt-3">
+                <label class="result-label">결과명</label>
+                <pre id="ad_name_result" class="result-box">(여기에 출력됩니다)</pre>
             </div>
         </div>
 
-        <div class="container text-left">
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="ad_name_title" class="col-form-label">소재명</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="ad_name_title" class="form-control form-control-sm"
-                        placeholder="{주제1}_{주제1.1}_{주제1.1.1}">
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="소재와 관련된 내용을 설정하고 띄어쓰기가 필요할 경우 언더바 _ 로 설정해야 합니다. (띄어쓰기 금지)">입력가이드</button>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="ad_name_ab_test" class="col-form-label">A/B테스트</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="ad_name_ab_test" class="form-control form-control-sm" placeholder="A or B">
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="A/B 테스트 진행 시 대문자로 기입해야 합니다. (미진행 시 기본값 A)">입력가이드</button>
-                </div>
-            </div>
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="ad_name_version" class="col-form-label">버전</label>
-                </div>
-                <div class="col-auto">
-                    <input type="text" id="ad_name_version" class="form-control form-control-sm" placeholder="00">
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-sm btn-danger"
-                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
-                        data-bs-container="body" data-bs-toggle="popover" data-bs-placement="right"
-                        data-bs-content="2자리 숫자로 입력해야 하며 첫 시작은 00입니다.">입력가이드</button>
-                </div>
-            </div>
-        </div>
 
-        <div class="container text-center">
+
+        <div id="create_utm_url">
             <div class="row">
                 <div class="col-auto">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_name_deliberate" class="col-form-label">심의정보</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="ad_name_deliberate" class="form-select form-select-sm"
-                                aria-label="ad name deliberate">
-                                <option selected value="">-- 필수선택 --</option>
-                                <option value="O">일반</option>
-                                <option value="Y">심의완료</option>
-                                <option value="N">비심의</option>
-                            </select>
-                        </div>
-                    </div>
+                    <button type="button" onclick="createUtmUrl()" class="btn btn-dark btn-sm"
+                        style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                        UTM 생성</button>
                 </div>
-                <div class="col-auto">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_name_type" class="col-form-label">소재유형</label>
-                        </div>
-                        <div class="col-auto">
-                            <select id="ad_name_type" class="form-select form-select-sm" aria-label="ad name type">
-                                <option selected value="">-- 필수선택 --</option>
-                                <option value="I">이미지</option>
-                                <option value="V">영상</option>
-                                <option value="M">복합</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <div class="row g-2 align-items-center">
-                        <div class="col-auto">
-                            <label for="ad_name_date" class="col-form-label">날짜</label>
-                        </div>
-                        <div class="col-auto">
-                            <input type="date" id="ad_name_date" class="form-control form-control-sm"
-                                aria-label="ad name date">
-                        </div>
-                        <div class="col-auto">
-                            <span id="ad_name_date_result"></span>
-                        </div>
-                    </div>
+                <div class="col">
+                    <!-- UTM 결과 보여주는 곳 -->
+                    <pre id="utm_url_result" class="result-box">(여기에 UTM URL이 생성됩니다)</pre>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <div id="create_utm_url">
-        <div class="row">
-            <div class="col-auto">
-                <button type="button" onclick="createUtmUrl()" class="btn btn-dark btn-sm"
+            <div>
+                <button type="button" onclick="addUtmToList()" class="btn btn-dark btn-sm"
                     style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                    UTM 생성</button>
-            </div>
-            <div class="col-auto">
-                <!-- UTM 결과 보여주는 곳 -->
-                <pre id="utm_url_result">(여기에 UTM URL이 생성됩니다)</pre>
+                    UTM 누적</button>
+                <span id="status_message" style="margin-left: 10px; color: green;"></span>
+                <button type="button" onclick="downloadUtmList()" class="btn btn-dark btn-sm"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
+                    CSV 다운로드</button>
             </div>
         </div>
-        <div>
-            <button type="button" onclick="addUtmToList()" class="btn btn-dark btn-sm"
-                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                UTM 누적</button>
-            <span id="status_message" style="margin-left: 10px; color: green;"></span>
-            <button type="button" onclick="downloadUtmList()" class="btn btn-dark btn-sm"
-                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;">
-                CSV 다운로드</button>
-        </div>
-    </div>
 
-    <div>
-        <!-- <ul id="utm_list_display" style="margin-top: 20px; padding-left: 20px; list-style-type: disc;"></ul> -->
-        <table border="1" class="table_box table table-hover caption-top">
-            <caption>UTM 누적 추가 <span style="color:red;">🚨새로고침하면 입력한 누적 내용들이 사라지니 주의하세요!</span></caption>
-            <thead class="table-dark">
-                <tr>
-                    <th>누적 추가 현황 </th>
-                </tr>
-            </thead>
-            <tbody id="utm_list_display">
-                <!-- <tr id="utm_list_display"></tr> -->
-            </tbody>
-        </table>
+        <div>
+            <!-- <ul id="utm_list_display" style="margin-top: 20px; padding-left: 20px; list-style-type: disc;"></ul> -->
+            <table border="1" class="table_box table table-hover caption-top">
+                <caption>UTM 누적 추가 <span style="color:red;">🚨새로고침하면 입력한 누적 내용들이 사라지니 주의하세요!</span></caption>
+                <thead class="table-dark">
+                    <tr>
+                        <th>누적 추가 현황 </th>
+                    </tr>
+                </thead>
+                <tbody id="utm_list_display">
+                    <!-- <tr id="utm_list_display"></tr> -->
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <hr>
@@ -793,45 +981,51 @@
                 utm_id: "에셋그룹ID-수동입력"
             },
             MTAR: {
-                utm_source: "{{site_source_name}}",
+                utm_source: "meta",
                 utm_medium: "paid_social",
                 utm_campaign: "{{adset.name}}",
-                utm_content: "{{ad.name}}-{{placement}}",
+                utm_content: "{{ad.name}}",
+                utm_term: "{{placement}}",
                 utm_id: "{{ad.id}}"
             },
             MTTR: {
-                utm_source: "{{site_source_name}}",
+                utm_source: "meta",
                 utm_medium: "paid_social",
                 utm_campaign: "{{adset.name}}",
-                utm_content: "{{ad.name}}-{{placement}}",
+                utm_content: "{{ad.name}}",
+                utm_term: "{{placement}}",
                 utm_id: "{{ad.id}}"
             },
             MTEG: {
-                utm_source: "{{site_source_name}}",
+                utm_source: "meta",
                 utm_medium: "paid_social",
                 utm_campaign: "{{adset.name}}",
-                utm_content: "{{ad.name}}-{{placement}}",
+                utm_content: "{{ad.name}}",
+                utm_term: "{{placement}}",
                 utm_id: "{{ad.id}}"
             },
             MTLD: {
-                utm_source: "{{site_source_name}}",
+                utm_source: "meta",
                 utm_medium: "paid_social",
                 utm_campaign: "{{adset.name}}",
-                utm_content: "{{ad.name}}-{{placement}}",
+                utm_content: "{{ad.name}}",
+                utm_term: "{{placement}}",
                 utm_id: "{{ad.id}}"
             },
             MTAP: {
-                utm_source: "{{site_source_name}}",
+                utm_source: "meta",
                 utm_medium: "paid_social",
                 utm_campaign: "{{adset.name}}",
-                utm_content: "{{ad.name}}-{{placement}}",
+                utm_content: "{{ad.name}}",
+                utm_term: "{{placement}}",
                 utm_id: "{{ad.id}}"
             },
             MTSL: {
-                utm_source: "{{site_source_name}}",
+                utm_source: "meta",
                 utm_medium: "paid_social",
                 utm_campaign: "{{adset.name}}",
-                utm_content: "{{ad.name}}-{{placement}}",
+                utm_content: "{{ad.name}}",
+                utm_term: "{{placement}}",
                 utm_id: "{{ad.id}}"
             },
             CTCA: {
