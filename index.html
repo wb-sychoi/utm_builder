@@ -54,6 +54,12 @@
             color: #111827;
         }
 
+        .example_text {
+            font-weight: 400;
+            font-size: 14px;
+            color: #6b7280;
+        }
+
         /* 각 빌더 블록 */
         .container.border {
             background: #fff;
@@ -289,6 +295,12 @@
             box-shadow: 0 0 0 .2rem rgba(0, 0, 0, .1);
             /* 포커스 표시 */
         }
+
+        #create_info {
+            text-align: center;
+            font-size: 11px;
+            color: #888;
+        }
     </style>
 </head>
 
@@ -297,11 +309,16 @@
         <div id="header">
             <h1>BUILDER</h1>
             <p>💡현재 베타 버전으로 오류가 있을 수 있습니다.<br>오류 있을 경우 문의부탁드리겠습니다.</p>
+            <div id="create_info">
+                ⓒ 2025. by <strong>Chan</strong> | (주)가치브라더 솔루션 UTM 규격화<br />
+                Contact: <a href="mailto:sychoi@withbrother.co.kr"
+                    style="color: #007bff; text-decoration: none;">sychoi@withbrother.co.kr</a>
+            </div>
         </div>
 
 
         <div id="create_campaign_name" class="container border border-secondary rounded-2">
-            <div class="row">
+            <div class="row flex justify-content-between align-items-center mb-3">
                 <div class="col-auto">
                     <h3>캠페인명 생성하기 <span class="example_text">| 예: 00.브랜드-AA</span></h3>
                 </div>
@@ -313,7 +330,7 @@
             </div>
 
             <div class="container text-left">
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
                         <label for="campaign_name_number" class="col-form-label">순번</label>
                     </div>
@@ -328,7 +345,7 @@
                     </div>
                 </div>
 
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
                         <label for="campaign_name_title" class="col-form-label">캠페인명</label>
                     </div>
@@ -368,7 +385,7 @@
 
 
         <div id="create_ad_group_name" class="container border border-secondary rounded-2">
-            <div class="row">
+            <div class="row flex justify-content-between align-items-center mb-3">
                 <div class="col-auto">
                     <h3>광고그룹명 생성하기 <span class="example_text">| 예: 00.AA-자사몰_일반-BR-A-M-NSPW</span></h3>
                 </div>
@@ -380,7 +397,7 @@
             </div>
 
             <div class="container text-left">
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
                         <label for="ad_group_name_number" class="col-form-label">순번</label>
                     </div>
@@ -394,7 +411,7 @@
                             data-bs-content="2자리 숫자로 입력해야 하며 첫 시작은 00입니다." aria-label="입력 가이드">?</button>
                     </div>
                 </div>
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
                         <label for="ad_group_name_code" class="col-form-label">캠페인 코드 자동 추출</label>
                     </div>
@@ -408,7 +425,7 @@
                             data-bs-content="위에서 생성된 캠페인명이 자동으로 입력됩니다." aria-label="입력 가이드">?</button>
                     </div>
                 </div>
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
                         <label for="ad_group_name_title" class="col-form-label">광고그룹명</label>
                     </div>
@@ -428,7 +445,7 @@
             <div class="container text-center">
                 <div class="row">
                     <div class="col-auto">
-                        <div class="row g-2 align-items-center">
+                        <div class="row g-2 align-items-center mb-2">
                             <div class="col-auto">
                                 <label for="ad_group_name_type" class="col-form-label">핵심목표</label>
                             </div>
@@ -486,7 +503,7 @@
                         </div>
                     </div>
                     <div class="col-auto">
-                        <div class="row g-2 align-items-center">
+                        <div class="row g-2 align-items-center mb-2">
                             <div class="col-auto">
                                 <label for="ad_group_name_platform" class="col-form-label">매체/유형</label>
                             </div>
@@ -607,7 +624,7 @@
         </div>
 
         <div id="create_ad_name" class="container border border-secondary rounded-2">
-            <div class="row">
+            <div class="row flex justify-content-between align-items-center mb-3">
                 <div class="col-auto">
                     <h3>광고/에셋명 생성하기 <span class="example_text">| 예: 자려한_코성형-A-00-Y-I-250529</span></h3>
                 </div>
@@ -619,7 +636,7 @@
             </div>
 
             <div class="container text-left">
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
                         <label for="ad_name_title" class="col-form-label">소재명</label>
                     </div>
@@ -634,7 +651,7 @@
                             aria-label="입력 가이드">?</button>
                     </div>
                 </div>
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
                         <label for="ad_name_ab_test" class="col-form-label">A/B테스트</label>
                     </div>
@@ -648,7 +665,7 @@
                             data-bs-content="A/B 테스트 진행 시 대문자로 기입해야 합니다. (미진행 시 기본값 A)" aria-label="입력 가이드">?</button>
                     </div>
                 </div>
-                <div class="row g-3 align-items-center">
+                <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
                         <label for="ad_name_version" class="col-form-label">버전</label>
                     </div>
@@ -712,7 +729,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 코드 입력 행 바로 아래에 추가 -->
             <div class="col-12 mt-3">
                 <label class="result-label">결과명</label>
                 <pre id="ad_name_result" class="result-box">(여기에 출력됩니다)</pre>
@@ -742,7 +758,6 @@
             </div>
 
             <div>
-                <!-- <ul id="utm_list_display" style="margin-top: 20px; padding-left: 20px; list-style-type: disc;"></ul> -->
                 <table border="1" class="table_box table table-hover caption-top">
                     <caption>UTM 누적 추가 <span style="color:red;">🚨새로고침하면 입력한 누적 내용들이 사라지니 주의하세요!</span></caption>
                     <thead class="table-dark">
@@ -971,18 +986,6 @@
                             <td>순번.{아이템}_{아이템}_...-{CODE}</td>
                             <td>순번.{CODE}-{아이템}_{아이템}_...-핵심목표-운영방식-디바이스-매체/캠페인유형-추가데이터</td>
                             <td>{주제1}_{주제1-1}-A/B-버전-심의정보-소재유형-등록일자-추가설명</td>
-                            <!-- <td rowspan="9" class="table-active">1. 같은 항목 및 띄어쓰기는 언더바(_) 로 작성 (띄어쓰기 금지)<br>예)
-                                01.브랜드_자사명
-                                (O)
-                                / 1. 브랜드 자사명 (X)<br>
-                                2. 순번은 마침표(.)로 구분, 구분자는 하이픈(-)으로 작성<br>예) 00.브랜드_자사명-GG<br>
-                                3. 마침표(.), 하이픈(-), 언더바(_) 외 특수문자 사용 금지<br>
-                                4. 코드명의 경우 A-Z 사이 2자리로 알파벳으로 구분<br>(만약 한 캠페인유형에서 AZ 까지 많을 경우 AA, AB, AC … AY,
-                                AZ, A0,
-                                A1, …
-                                A9까지
-                                가능)
-                            </td> -->
                         </tr>
                         <!-- 네이버 -->
                         <tr>
