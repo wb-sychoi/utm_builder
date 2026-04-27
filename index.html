@@ -638,6 +638,19 @@
             <div class="container text-left">
                 <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
+                        <label for="ad_name_date" class="col-form-label">날짜</label>
+                    </div>
+                    <div class="col-auto">
+                        <input type="date" id="ad_name_date" class="form-control form-control-sm"
+                            aria-label="ad name date">
+                    </div>
+                    <div class="col-auto">
+                        <span id="ad_name_date_result"></span>
+                    </div>
+
+                </div>
+                <div class="row g-3 align-items-center mb-2">
+                    <div class="col-auto">
                         <label for="ad_name_title" class="col-form-label">소재명</label>
                     </div>
                     <div class="col-auto">
@@ -713,7 +726,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-auto">
+                    <!-- <div class="col-auto">
                         <div class="row g-2 align-items-center">
                             <div class="col-auto">
                                 <label for="ad_name_date" class="col-form-label">날짜</label>
@@ -726,7 +739,7 @@
                                 <span id="ad_name_date_result"></span>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-12 mt-3">
@@ -932,7 +945,8 @@
                         </tr>
                         <!-- 메타 -->
                         <tr>
-                            <td>메타</td>
+                            <td rowspan="2">메타</td>
+                            <td>전체</td>
                             <td>meta</td>
                             <td>paid_social</td>
                             <td>{{adset.name}}</td>
@@ -942,13 +956,14 @@
                         </tr>
                         <tr>
                             <td>적용 예시</td>
-                            <td colspan="5">
+                            <td colspan="6">
                                 utm_source=meta&utm_medium=paid_social&utm_campaign={{adset.name}}&utm_content={{ad.name}}&utm_term={{placement}}&utm_id={{ad.id}}
                             </td>
                         </tr>
                         <!-- 틱톡 -->
                         <tr>
-                            <td>틱톡</td>
+                            <td rowspan="2">틱톡</td>
+                            <td>전체</td>
                             <td>tiktok</td>
                             <td>paid_social</td>
                             <td>__AID_NAME__</td>
@@ -958,7 +973,7 @@
                         </tr>
                         <tr>
                             <td>적용 예시</td>
-                            <td colspan="5">
+                            <td colspan="6">
                                 utm_source=tiktok&utm_medium=paid_social&utm_campaign=__AID_NAME__&utm_content=__CID_NAME__&utm_id=__CID__
                             </td>
                         </tr>
@@ -1301,7 +1316,7 @@
             const adNameType = document.getElementById("ad_name_type").value;
             const adNameDateResult = document.getElementById("ad_name_date_result").textContent;
 
-            const output = `${adNameTitle}-${adNameAbTest}-${adNameVersion}-${adNameDeliberate}-${adNameType}-${adNameDateResult}`;
+            const output = `${adNameDateResult}-${adNameTitle}-${adNameAbTest}-${adNameVersion}-${adNameDeliberate}-${adNameType}`;
             document.getElementById("ad_name_result").textContent = output;
         }
 
