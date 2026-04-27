@@ -638,19 +638,6 @@
             <div class="container text-left">
                 <div class="row g-3 align-items-center mb-2">
                     <div class="col-auto">
-                        <label for="ad_name_date" class="col-form-label">날짜</label>
-                    </div>
-                    <div class="col-auto">
-                        <input type="date" id="ad_name_date" class="form-control form-control-sm"
-                            aria-label="ad name date">
-                    </div>
-                    <div class="col-auto">
-                        <span id="ad_name_date_result"></span>
-                    </div>
-
-                </div>
-                <div class="row g-3 align-items-center mb-2">
-                    <div class="col-auto">
                         <label for="ad_name_title" class="col-form-label">소재명</label>
                     </div>
                     <div class="col-auto">
@@ -726,7 +713,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="col-auto">
+                    <div class="col-auto">
                         <div class="row g-2 align-items-center">
                             <div class="col-auto">
                                 <label for="ad_name_date" class="col-form-label">날짜</label>
@@ -739,7 +726,7 @@
                                 <span id="ad_name_date_result"></span>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
                 </div>
             </div>
             <div class="col-12 mt-3">
@@ -1316,7 +1303,7 @@
             const adNameType = document.getElementById("ad_name_type").value;
             const adNameDateResult = document.getElementById("ad_name_date_result").textContent;
 
-            const output = `${adNameDateResult}-${adNameTitle}-${adNameAbTest}-${adNameVersion}-${adNameDeliberate}-${adNameType}`;
+            const output = `${adNameTitle}-${adNameAbTest}-${adNameVersion}-${adNameDeliberate}-${adNameType}-${adNameDateResult}`;
             document.getElementById("ad_name_result").textContent = output;
         }
 
